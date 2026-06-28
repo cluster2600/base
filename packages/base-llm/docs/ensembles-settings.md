@@ -50,7 +50,6 @@ flowchart LR
 | --- | --- | --- |
 | `proposers` | yes | List of member refs that draft in parallel. |
 | `aggregator` | yes | Member ref that synthesizes the drafts. |
-| `synthesisPrompt` | no | Override the aggregator guidance. |
 
 `type: "triumvirat"`
 

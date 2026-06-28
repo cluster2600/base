@@ -101,7 +101,6 @@ function coordinatorPrompt(poolKeys, state) {
  *        Defaults to a prompted coordinator over the cheapest (first) pool model.
  * @param {number} [options.maxTurns=6] Hard turn budget; guarantees termination.
  * @param {string} [options.id="triumvirat"]
- * @param {{thinker:string, worker:string, verifier:string}} [options.rolePrompts]
  * @returns {{id: string, complete: Function}}
  */
 export function createTriumviratModel(options = {}) {
@@ -110,7 +109,6 @@ export function createTriumviratModel(options = {}) {
     coordinator,
     maxTurns = 6,
     id = "triumvirat",
-    rolePrompts = DEFAULT_ROLE_PROMPTS,
   } = options;
 
   if (!pool || typeof pool !== "object" || Array.isArray(pool)) {
@@ -166,7 +164,7 @@ export function createTriumviratModel(options = {}) {
         };
 
   function roleRequest(role, state) {
-    const preamble = `${rolePrompts[role]}\n\n${buildScratchpad(state)}`;
+    const preamble = `${DEFAULT_ROLE_PROMPTS[role]}\n\n${buildScratchpad(state)}`;
     const messages = withSystem(preamble, state.request.messages);
     const req = { ...state.request, messages, tools: role === "worker" ? state.request.tools : undefined };
     if (role !== "worker") req.temperature = 0;

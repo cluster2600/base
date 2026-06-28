@@ -56,8 +56,6 @@ const monitored = createLangfuseModel({ model: createMoaModel({ proposers, aggre
 | `secretKey` | env `LANGFUSE_SECRET_KEY` | Langfuse secret key. |
 | `baseUrl` | env `LANGFUSE_HOST` or `https://cloud.langfuse.com` | Langfuse host (self-hosted supported). |
 | `fetch` | `globalThis.fetch` | Injectable fetch (used in tests). |
-| `traceName` | the model id | Name on the emitted trace. |
-| `metadata` | none | Static metadata merged into every trace. |
 | `onError` | swallow | Called with any ingestion failure. |
 
 `flush()` resolves once all in-flight ingestion sends complete. `stream()` is

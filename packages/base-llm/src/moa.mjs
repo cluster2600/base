@@ -55,7 +55,6 @@ function addUsage(acc, usage) {
  * @param {{complete: Function, stream?: Function}} [options.aggregator]
  *        Model that synthesizes the drafts into the final response.
  * @param {string} [options.id="moa"] Identifier reported as `model.id`.
- * @param {string} [options.synthesisPrompt] Override the aggregator guidance.
  * @returns {{id: string, complete: Function, stream?: Function}}
  */
 export function createMoaModel(options = {}) {
@@ -63,7 +62,6 @@ export function createMoaModel(options = {}) {
     proposers,
     aggregator,
     id = "moa",
-    synthesisPrompt = DEFAULT_SYNTHESIS_PROMPT,
   } = options;
 
   if (!Array.isArray(proposers) || proposers.length === 0) {
@@ -100,7 +98,7 @@ export function createMoaModel(options = {}) {
 
   function aggregatorRequest(request, drafts) {
     const guidance =
-      synthesisPrompt +
+      DEFAULT_SYNTHESIS_PROMPT +
       "\n\n" +
       drafts.map((d, i) => `### Candidate response ${i + 1}\n${d.text}`).join("\n\n");
     const [first, ...rest] = request.messages;

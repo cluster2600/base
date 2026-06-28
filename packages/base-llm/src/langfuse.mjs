@@ -43,8 +43,6 @@ function mapUsage(usage) {
  * @param {string} [options.baseUrl] Langfuse host. Defaults to env LANGFUSE_HOST or cloud.langfuse.com.
  * @param {*} [options.fetch] fetch implementation (default globalThis.fetch).
  * @param {*} [options.env] Environment object (default process.env).
- * @param {string} [options.traceName] Trace name (default the model id).
- * @param {object} [options.metadata] Static metadata merged into every trace.
  * @param {(error: unknown) => void} [options.onError] Called on ingestion failure (default: swallow).
  * @returns {{ id: string, complete: Function, stream?: Function, flush: () => Promise<void> }}
  */
@@ -54,8 +52,6 @@ export function createLangfuseModel(options = {}) {
     baseUrl,
     fetch: fetchImpl,
     env = process.env,
-    traceName,
-    metadata,
     onError,
   } = options;
 
@@ -77,7 +73,7 @@ export function createLangfuseModel(options = {}) {
     throw new LlmConfigError("createLangfuseModel: no fetch available; pass options.fetch");
   }
   const auth = `Basic ${btoa(`${publicKey}:${secretKey}`)}`;
-  const name = traceName ?? innerModel.id ?? "base-llm";
+  const name = innerModel.id ?? "base-llm";
 
   /** @type {Set<Promise<void>>} in-flight ingestion sends, drained by flush(). */
   const pending = new Set();
@@ -96,7 +92,6 @@ export function createLangfuseModel(options = {}) {
           timestamp: iso(start),
           input: request.messages,
           ...(output !== undefined ? { output } : {}),
-          ...(metadata ? { metadata } : {}),
         },
       },
       {
