@@ -128,12 +128,7 @@ async function buildEnsembleModel(settings, name, ensemble, { env = process.env,
       Promise.all(ensemble.proposers.map(buildRef)),
       buildRef(ensemble.aggregator),
     ]);
-    return llm.createMoaModel({
-      proposers,
-      aggregator,
-      id: name,
-      ...(ensemble.synthesisPrompt ? { synthesisPrompt: ensemble.synthesisPrompt } : {}),
-    });
+    return llm.createMoaModel({ proposers, aggregator, id: name });
   }
 
   if (type === "triumvirat") {

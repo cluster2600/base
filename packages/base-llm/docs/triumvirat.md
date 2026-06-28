@@ -75,7 +75,6 @@ const out = await triumvirat.complete({ messages: [userMessage("Write and verify
 | `coordinator` | prompted over cheapest | A dedicated model, or a custom `{ decide(state, ctx) }`. |
 | `maxTurns` | `6` | Hard turn budget; guarantees termination. |
 | `id` | `"triumvirat"` | Value reported as `model.id`. |
-| `rolePrompts` | `DEFAULT_ROLE_PROMPTS` | `{ thinker, worker, verifier }` preambles. |
 
 ## A custom coordinator
 

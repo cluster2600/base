@@ -61,7 +61,6 @@ const out = await moa.complete({ messages: [userMessage("Explain CRDTs.")] });
 | `proposers` | (required) | Non-empty list of models that draft in parallel. |
 | `aggregator` | (required) | Model that synthesizes the drafts. |
 | `id` | `"moa"` | Value reported as `model.id`. |
-| `synthesisPrompt` | `DEFAULT_SYNTHESIS_PROMPT` | Aggregator guidance preamble. |
 
 `stream()` is exposed only when the aggregator supports streaming; proposers are
 gathered first, then the aggregator streams.
