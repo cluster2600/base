@@ -36,4 +36,5 @@ export { createAnthropicModel } from "./src/anthropic.mjs";
 export { createGoogleModel } from "./src/google.mjs";
 export { createFauxModel } from "./src/faux.mjs";
 export { createMoaModel, DEFAULT_SYNTHESIS_PROMPT } from "./src/moa.mjs";
+export { createTriumviratModel, DEFAULT_ROLE_PROMPTS } from "./src/triumvirat.mjs";
 export { collectStream } from "./src/streaming.mjs";
