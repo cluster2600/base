@@ -35,4 +35,5 @@ export { createOpenAICompatibleModel, createOllamaModel } from "./src/openai.mjs
 export { createAnthropicModel } from "./src/anthropic.mjs";
 export { createGoogleModel } from "./src/google.mjs";
 export { createFauxModel } from "./src/faux.mjs";
+export { createMoaModel, DEFAULT_SYNTHESIS_PROMPT } from "./src/moa.mjs";
 export { collectStream } from "./src/streaming.mjs";
